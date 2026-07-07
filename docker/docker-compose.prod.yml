@@ -5,6 +5,7 @@ services:
 
   nginx:
     image: nginx:alpine
+    container_name: nginx
     restart: on-failure
     depends_on:
       - stands-bot
