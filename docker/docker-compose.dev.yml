@@ -1,0 +1,16 @@
+services:
+  stands-bot-postgres:
+    ports:
+      - 5432:5432
+
+  stands-bot:
+    ports:
+      - 8000:8000
+    networks:
+      - default
+      - mattermost
+
+networks:
+  mattermost:
+    name: mattermost_default
+    external: true

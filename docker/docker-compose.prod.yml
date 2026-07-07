@@ -1,0 +1,17 @@
+services:
+  stands-bot:
+    expose:
+      - 8000
+
+  nginx:
+    image: nginx:alpine
+    restart: on-failure
+    depends_on:
+      - stands-bot
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - /opt/project/certbot-www:/var/www/certbot:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
