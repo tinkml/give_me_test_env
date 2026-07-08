@@ -9,8 +9,8 @@ class TakeCommand:
         self._repository = repository
         self._resolution_policy = resolution_policy
 
-    def execute(self, user_name: str, argument: str) -> str:
-        stands = self._repository.list_all()
+    async def execute(self, user_name: str, argument: str) -> str:
+        stands = await self._repository.list_all()
 
         try:
             stand = self._resolution_policy.resolve(argument, stands)
@@ -18,5 +18,5 @@ class TakeCommand:
             return str(error)
 
         taken_stand = stand.take(user_name, datetime.now(timezone.utc))
-        self._repository.save(taken_stand)
+        await self._repository.save(taken_stand)
         return f"🤖 Пользователь {user_name} занял {taken_stand.name} "

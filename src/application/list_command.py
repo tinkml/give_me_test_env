@@ -7,6 +7,6 @@ class ListCommand:
     def __init__(self, repository: StandRepository) -> None:
         self._repository = repository
 
-    def execute(self, *_) -> str:
-        stands = self._repository.list_all()
+    async def execute(self, *_) -> str:
+        stands = await self._repository.list_all()
         return StandsMarkdownFormatter.format(stands)

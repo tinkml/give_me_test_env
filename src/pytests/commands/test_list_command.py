@@ -5,7 +5,7 @@ from src.domain.stand import Stand
 from src.pytests.commands.fakes import FakeStandRepository
 
 
-def test_list_formats_free_and_occupied_stands() -> None:
+async def test_list_formats_free_and_occupied_stands() -> None:
     when = datetime(2026, 7, 5, 12, 0, tzinfo=timezone.utc)
     repository = FakeStandRepository(
         [
@@ -15,7 +15,7 @@ def test_list_formats_free_and_occupied_stands() -> None:
     )
     command = ListCommand(repository)
 
-    result = command.execute(user_name="bob", argument="")
+    result = await command.execute(user_name="bob", argument="")
 
     assert result == (
         "1. akb1 — Свободен\n"
@@ -23,7 +23,7 @@ def test_list_formats_free_and_occupied_stands() -> None:
     )
 
 
-def test_list_on_empty_repository_returns_empty_string() -> None:
+async def test_list_on_empty_repository_returns_empty_string() -> None:
     command = ListCommand(FakeStandRepository([]))
 
-    assert command.execute(user_name="bob", argument="") == ""
+    assert await command.execute(user_name="bob", argument="") == ""

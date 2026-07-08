@@ -12,7 +12,7 @@ class _StubCommand:
     def __init__(self, response: str) -> None:
         self._response = response
 
-    def execute(self, user_name: str, argument: str) -> str:
+    async def execute(self, user_name: str, argument: str) -> str:
         return self._response
 
 
@@ -79,7 +79,7 @@ def test_webhook_returns_friendly_message_and_200_when_command_raises(
     client: TestClient,
 ) -> None:
     class _FailingCommand:
-        def execute(self, user_name: str, argument: str) -> str:
+        async def execute(self, user_name: str, argument: str) -> str:
             raise RuntimeError("db is down")
 
     client.app.dependency_overrides[get_dispatcher] = lambda: CommandDispatcher(

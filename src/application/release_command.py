@@ -7,8 +7,8 @@ class ReleaseCommand:
         self._repository = repository
         self._policy = policy
 
-    def execute(self, user_name: str, argument: str) -> str:
-        stands = self._repository.list_all()
+    async def execute(self, user_name: str, argument: str) -> str:
+        stands = await self._repository.list_all()
 
         try:
             stand = self._policy.resolve(argument, stands)
@@ -16,5 +16,5 @@ class ReleaseCommand:
             return str(error)
 
         released = stand.release()
-        self._repository.save(released)
+        await self._repository.save(released)
         return f"🥳 {released.name} освобождён"

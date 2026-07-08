@@ -1,8 +1,8 @@
 from functools import lru_cache
-from typing import Iterator
+from typing import AsyncIterator
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.dispatcher import CommandDispatcher
 from src.application.list_command import ListCommand
@@ -19,14 +19,14 @@ def get_settings() -> Settings:
     return Settings()
 
 
-def get_db_session(settings: Settings = Depends(get_settings)) -> Iterator[Session]:
+async def get_db_session(settings: Settings = Depends(get_settings)) -> AsyncIterator[AsyncSession]:
     engine = get_engine(settings.database_url)
     session_factory = get_session_factory(engine)
-    with session_factory() as session:
+    async with session_factory() as session:
         yield session
 
 
-def get_repository(session: Session = Depends(get_db_session)) -> SqlAlchemyStandRepository:
+def get_repository(session: AsyncSession = Depends(get_db_session)) -> SqlAlchemyStandRepository:
     return SqlAlchemyStandRepository(session)
 
 
