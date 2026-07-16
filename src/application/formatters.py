@@ -28,4 +28,5 @@ class StandsMarkdownFormatter:
 
     @staticmethod
     def _occupied_stand(index: int, stand: Stand) -> str:
-        return f"| {index} | {stand.name} | 🚫 Занят | {stand.occupied_by} | {stand.occupied_since:%Y-%m-%d %H:%M} |"
+        since = stand.occupied_since.strftime("%Y-%m-%d %H:%M")
+        return f"| {index} | {stand.name} | 🚫 Занят | {stand.occupied_by} | {since} |"

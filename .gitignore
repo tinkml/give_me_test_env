@@ -11,3 +11,11 @@ data/
 certbot-www/
 *.pem
 *.key
+
+# Локальный Mattermost, разворачивается make init / scripts/setup-mattermost.sh
+/mattermost/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+.beads-credential-key
+.beads/proxieddb/

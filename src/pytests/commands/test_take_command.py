@@ -19,9 +19,7 @@ async def test_take_marks_free_stand_occupied_by_caller() -> None:
 
 
 async def test_take_overwrites_existing_owner_without_check() -> None:
-    repository = FakeStandRepository(
-        [Stand(name="slplay7", status="occupied", occupied_by="alice")]
-    )
+    repository = FakeStandRepository([Stand(name="slplay7", status="occupied", occupied_by="alice")])
     command = TakeCommand(repository, StandResolutionPolicy())
 
     await command.execute(user_name="bob", argument="slplay7")

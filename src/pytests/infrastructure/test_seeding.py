@@ -14,9 +14,7 @@ async def test_ensure_seeded_adds_missing_stands_as_free() -> None:
 
 
 async def test_ensure_seeded_does_not_touch_existing_stand() -> None:
-    repository = FakeStandRepository(
-        [Stand(name="akb1", status="occupied", occupied_by="alice")]
-    )
+    repository = FakeStandRepository([Stand(name="akb1", status="occupied", occupied_by="alice")])
 
     await ensure_seeded(repository, ["akb1"])
 

@@ -1,4 +1,4 @@
-from src.application.interfaces import StandRepository, StandPolicy
+from src.application.interfaces import StandPolicy, StandRepository
 from src.domain.exceptions import StandNotFoundError
 
 

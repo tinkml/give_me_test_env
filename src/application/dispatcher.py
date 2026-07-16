@@ -3,6 +3,7 @@ from src.application.interfaces import Command
 
 class UnknownTriggerWordError(Exception):
     def __init__(self, trigger_word: str) -> None:
+        self.trigger_word = trigger_word
         msg = f"Неизвестное триггер-слово: {trigger_word}"
         super().__init__(msg)
 

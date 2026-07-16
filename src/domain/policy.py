@@ -5,7 +5,6 @@ from src.domain.stand import Stand
 
 
 class StandResolutionPolicy:
-
     @classmethod
     def resolve(cls, identifier: str, stands: list[Stand]) -> Stand:
         identifier = identifier.strip()

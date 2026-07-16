@@ -5,9 +5,7 @@ from src.pytests.commands.fakes import FakeStandRepository
 
 
 async def test_release_frees_occupied_stand() -> None:
-    repository = FakeStandRepository(
-        [Stand(name="slplay7", status="occupied", occupied_by="alice")]
-    )
+    repository = FakeStandRepository([Stand(name="slplay7", status="occupied", occupied_by="alice")])
     command = ReleaseCommand(repository, StandResolutionPolicy())
 
     result = await command.execute(user_name="bob", argument="slplay7")
@@ -20,9 +18,7 @@ async def test_release_frees_occupied_stand() -> None:
 
 
 async def test_release_does_not_check_caller_is_owner() -> None:
-    repository = FakeStandRepository(
-        [Stand(name="slplay7", status="occupied", occupied_by="alice")]
-    )
+    repository = FakeStandRepository([Stand(name="slplay7", status="occupied", occupied_by="alice")])
     command = ReleaseCommand(repository, StandResolutionPolicy())
 
     result = await command.execute(user_name="bob", argument="slplay7")

@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from src.domain.stand import Stand
 
@@ -13,7 +13,7 @@ def test_new_stand_is_free_by_default() -> None:
 
 def test_take_marks_stand_occupied() -> None:
     stand = Stand(name="slplay7", status="free")
-    when = datetime(2026, 7, 5, 12, 0, tzinfo=timezone.utc)
+    when = datetime(2026, 7, 5, 12, 0, tzinfo=UTC)
 
     taken = stand.take("alice", when)
 
@@ -23,7 +23,7 @@ def test_take_marks_stand_occupied() -> None:
 
 
 def test_take_is_unconditional_and_overwrites_current_owner() -> None:
-    when = datetime(2026, 7, 5, 12, 0, tzinfo=timezone.utc)
+    when = datetime(2026, 7, 5, 12, 0, tzinfo=UTC)
     stand = Stand(name="slplay7", status="occupied", occupied_by="alice", occupied_since=when)
 
     taken = stand.take("bob", when)
@@ -32,7 +32,7 @@ def test_take_is_unconditional_and_overwrites_current_owner() -> None:
 
 
 def test_release_clears_occupancy() -> None:
-    when = datetime(2026, 7, 5, 12, 0, tzinfo=timezone.utc)
+    when = datetime(2026, 7, 5, 12, 0, tzinfo=UTC)
     stand = Stand(name="slplay7", status="occupied", occupied_by="alice", occupied_since=when)
 
     released = stand.release()
@@ -45,4 +45,4 @@ def test_release_clears_occupancy() -> None:
 def test_stand_is_immutable() -> None:
     stand = Stand(name="slplay7", status="free")
 
-    assert stand.take("alice", datetime.now(timezone.utc)) is not stand
+    assert stand.take("alice", datetime.now(UTC)) is not stand

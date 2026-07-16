@@ -12,12 +12,12 @@ class StandRepository(Protocol):
 
 
 class StandPolicy(Protocol):
-
-    def resolve(self, identifier: str, stands: list[Stand]) -> Stand:...
+    def resolve(self, identifier: str, stands: list[Stand]) -> Stand: ...
 
 
 class Command(Protocol):
     async def execute(self, user_name: str, argument: str) -> str: ...
+
 
 class ResponseBuilder(Protocol):
     def build(self, stand: Stand) -> Stand: ...

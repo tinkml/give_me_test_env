@@ -1,9 +1,9 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.infrastructure.utils import to_domain
 from src.domain.stand import Stand
 from src.infrastructure.models import StandModel
+from src.infrastructure.utils import to_domain
 
 
 class SqlAlchemyStandRepository:
