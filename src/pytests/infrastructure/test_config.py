@@ -6,8 +6,6 @@ from src.infrastructure.config import Settings
 
 def _settings(**overrides: str) -> Settings:
     defaults: dict[str, str] = {
-        "stands_bot_webhook_token": "secret",
-        "stand_names": "akb1",
         "postgres_user": "test_user",
         "postgres_password": "test_password",
         "postgres_db": "test_db",
@@ -15,15 +13,9 @@ def _settings(**overrides: str) -> Settings:
     return Settings(_env_file=None, **{**defaults, **overrides})
 
 
-def test_stand_name_list_splits_and_strips_comma_separated_names() -> None:
-    settings = _settings(stand_names=" akb1, slplay4 ,slplay7")
-
-    assert settings.stand_name_list == ["akb1", "slplay4", "slplay7"]
-
-
 def test_postgres_credentials_are_required() -> None:
     with pytest.raises(ValidationError):
-        Settings(_env_file=None, stands_bot_webhook_token="secret", stand_names="akb1")
+        Settings(_env_file=None)
 
 
 def test_database_url_is_built_from_postgres_parts() -> None:
@@ -56,3 +48,15 @@ def test_sentry_and_apm_are_disabled_by_default() -> None:
 
     assert settings.sentry_dsn is None
     assert settings.elastic_apm_server_url is None
+
+
+def test_channels_config_path_defaults_to_config_channels_yml() -> None:
+    settings = _settings()
+
+    assert settings.channels_config_path == "config/channels.yml"
+
+
+def test_channels_config_path_can_be_overridden() -> None:
+    settings = _settings(channels_config_path="custom/channels.yml")
+
+    assert settings.channels_config_path == "custom/channels.yml"

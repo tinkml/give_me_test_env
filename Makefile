@@ -28,11 +28,17 @@ up:
 down:
 	docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml down
 
+reload:
+	make down && make up
+
 up-prod:
 	docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml up -d --build
 
 down-prod:
 	docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml down
+
+reload-prod:
+	make down-prod && make up-prod
 
 mm-up:
 	docker compose -f mattermost/docker-compose.yml -f mattermost/docker-compose.without-nginx.yml -f mattermost/docker-compose.override.yml up -d

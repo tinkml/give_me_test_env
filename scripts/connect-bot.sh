@@ -19,5 +19,5 @@ cat <<'EOF'
 
 Готово. Осталось настроить Outgoing Webhook в интерфейсе Mattermost
 (см. README.md, раздел "Интеграция с Mattermost") и указать выданный
-токен в STANDS_BOT_WEBHOOK_TOKEN в .env.
+токен в .env, в переменную из token_env для этой team в config/channels.yml.
 EOF

@@ -9,8 +9,7 @@ class Settings(BaseSettings):
 
     environment: Literal["local", "dev", "prod"] = "local"
 
-    stands_bot_webhook_token: str
-    stand_names: str
+    channels_config_path: str = "config/channels.yml"
 
     postgres_user: str
     postgres_password: str
@@ -23,10 +22,6 @@ class Settings(BaseSettings):
 
     elastic_apm_server_url: str | None = None
     elastic_apm_service_name: str = "stands-bot"
-
-    @property
-    def stand_name_list(self) -> list[str]:
-        return [name.strip() for name in self.stand_names.split(",") if name.strip()]
 
     @computed_field  # type: ignore[prop-decorator]
     @property

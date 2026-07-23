@@ -1,0 +1,15 @@
+channels:
+  akb:
+    token_env: WEBHOOK_TOKEN_AKB
+    stands:
+      - akb1
+      - slplay4
+      - slplay7
+      - slplay8
+      - slplay9
+  sl:
+    token_env: WEBHOOK_TOKEN_SL
+    stands:
+      - ecom5
+      - slplay1
+      - slplay2

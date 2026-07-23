@@ -13,3 +13,4 @@ class StandModel(Base):
     status: Mapped[str]
     occupied_by: Mapped[str | None]
     occupied_since: Mapped[datetime | None]
+    team: Mapped[str] = mapped_column(default="no_team", server_default="no_team", index=True)
